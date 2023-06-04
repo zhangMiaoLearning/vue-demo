@@ -10,6 +10,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElInput: typeof import('element-plus/es')['ElInput']
     Item: typeof import('./components/Item.vue')['default']
     Left: typeof import('./components/Left.vue')['default']

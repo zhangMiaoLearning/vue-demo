@@ -13,8 +13,6 @@ const checkList = ref([])
 const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()
-
-console.log(props.todoList)
 </script>
 <style>
 .el-checkbox__input.is-checked + .el-checkbox__label {

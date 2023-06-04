@@ -2,8 +2,8 @@
   <div class="justify content">
     <Left />
     <div class="right">
-      <ListHeader />
-      <TodoList :todoList="todoList"/>
+      <ListHeader @addTodoItem="addItem" />
+      <TodoList :todoList="todoList" />
     </div>
   </div>
 </template>
@@ -16,7 +16,13 @@ const todoList = ref([
   { id: 1, name: 'todo 1', status: true },
   { id: 2, name: 'todo 2', status: false }
 ])
+
+const addItem = (newItem:string) => {
+  const length = todoList.value.length
+  todoList.value.push({id:length + 1,name:newItem,status:true})
+}
 </script>
+
 <style scoped>
 .content {
   width: 1000px;

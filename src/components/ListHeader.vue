@@ -3,7 +3,7 @@
     <div class="title">Use this manage your life and work</div>
     <div class="justify">
       <el-input class="input" placeholder="Enter your to do item" v-model="input" />
-      <el-button :icon="Plus" />
+      <el-button :icon="Plus" @click="$emit('addTodoItem', input)"/>
     </div>
   </div>
 </template>

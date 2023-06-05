@@ -4,6 +4,7 @@
     <div class="right">
       <ListHeader @addTodoItem="addItem"/>
       <TodoList :todoList="todoList" @deleteItem="deleteItem" />
+      <CompletedList :todoList="todoList"/>
     </div>
   </div>
 </template>
@@ -20,8 +21,10 @@ const todoList = ref([
 const addItem = (newItem: string) => {
   const length = todoList.value.length
   if (newItem.trim()) {
-    todoList.value.push({ id: length + 1, name: newItem, status: true })
+    todoList.value.push({ id: length + 1, name: newItem, status: false })
   }
+  console.log(todoList.value);
+  
 }
 
 const deleteItem = (id: number) => {
@@ -33,6 +36,7 @@ const deleteItem = (id: number) => {
 <style scoped>
 .content {
   width: 1000px;
+  height: 100vh;
   background-color: white;
 }
 .right {

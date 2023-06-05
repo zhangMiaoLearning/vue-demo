@@ -1,27 +1,21 @@
 <template>
   <div class="list">
-    <el-checkbox-group v-model="checkList">
       <div v-for="item in props.todoList">
-        <div v-show="item.status" class="list-item">
-          <el-checkbox class="checkbox" :key="item.id" :label="item.name" />
+        <div v-show="!item.status" class="list-item">
+          <el-checkbox class="checkbox" :key="item.id" :label="item.name" v-model="item.status" />
           <Delete class="delete-icon" @click="$emit('deleteItem', item.id)" />
         </div>
       </div>
-    </el-checkbox-group>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Delete } from '@element-plus/icons-vue'
-const checkList = ref([])
 const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()
 </script>
-<style>
-.el-checkbox__input.is-checked + .el-checkbox__label {
-  color: var(--el-checkbox-text-color);
-}
+<style scoped>
 .delete-icon {
   height: 16px;
   width: 16px;
@@ -29,8 +23,10 @@ const props = defineProps<{
   display: none;
 }
 .list {
-  padding: 16px 40px;
+  margin: 16px 0;
+  padding: 0 40px;
   min-height: 140px;
+  max-height: calc(100vh - 308px);
   overflow: auto;
 }
 .checkbox {

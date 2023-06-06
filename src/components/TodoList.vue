@@ -1,11 +1,16 @@
 <template>
   <div class="list">
-      <div v-for="item in props.todoList">
-        <div v-show="!item.status" class="list-item">
-          <el-checkbox class="checkbox" :key="item.id" :label="item.name" v-model="item.status" />
-          <Delete class="delete-icon" @click="$emit('deleteItem', item.id)" />
-        </div>
+    <div v-for="item in props.todoList">
+      <div v-show="!item.status" class="list-item">
+        <el-checkbox
+          class="list-item-checkbox"
+          :key="item.id"
+          :label="item.name"
+          v-model="item.status"
+        />
+        <Delete class="list-item-delete-icon" @click="$emit('deleteItem', item.id)" />
       </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -15,44 +20,48 @@ const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()
 </script>
-<style scoped>
-.delete-icon {
-  height: 16px;
-  width: 16px;
-  color: #f56969;
-  display: none;
-}
+<style scoped lang="less">
 .list {
-  margin: 16px 0;
-  padding: 0 40px;
+  margin: 16px 40px;
   min-height: 140px;
   max-height: calc(100vh - 308px);
   overflow: auto;
-}
-.checkbox {
-  padding-left: 16px;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    height: 40px;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    text-overflow: ellipsis;
+
+    &:hover {
+      background-color: #dfdfdf;
+    }
+
+    &-checkbox {
+      padding-left: 16px;
+    }
+
+    &-delete-icon {
+      height: 16px;
+      width: 16px;
+      color: #f56969;
+      display: none;
+    }
+
+    &:hover .list-item-delete-icon {
+      display: inline;
+      padding-right: 16px;
+      padding-left: 8px;
+    }
+  }
 }
 .el-checkbox__label {
   text-overflow: ellipsis;
   max-width: 540px;
   overflow: hidden;
-}
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f9f9f9;
-  height: 40px;
-  margin-bottom: 8px;
-  border-radius: 3px;
-  text-overflow: ellipsis;
-}
-.list-item:hover {
-  background-color: #dfdfdf;
-}
-.list-item:hover .delete-icon {
-  display: inline;
-  padding-right: 16px;
-  padding-left: 8px;
 }
 </style>

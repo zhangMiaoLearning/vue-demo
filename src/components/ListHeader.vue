@@ -1,9 +1,9 @@
 <template>
   <div class="list-header">
-    <div class="title">Use this manage your life and work</div>
+    <div class="list-header-title">Use this manage your life and work</div>
     <div class="justify">
-      <input class="input" placeholder="Enter your to do item" v-model="input"/>
-      <el-button class="button" :icon="Plus" @click="$emit('addTodoItem', input)"/>
+      <input class="input" placeholder="Enter your to do item" v-model="input" />
+      <el-button class="button" :icon="Plus" @click="handleAddTodoList" />
     </div>
   </div>
 </template>
@@ -12,20 +12,26 @@
 import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const input = ref('')
+const emit = defineEmits(['addTodoItem'])
+const handleAddTodoList = () => {
+  emit('addTodoItem', input.value)
+  input.value = ''
+}
 </script>
-<style scoped>
+<style scoped lang="less">
 .list-header {
-  display:flex;
+  display: flex;
   flex-direction: column;
   text-align: center;
   padding: 0 40px;
-}
-.title {
-  font-size: 20px;
-  font-weight: bold;
-  font-style: italic;
-  color: #343a40;
-  margin: 16px 0;
+
+  &-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    color: #343a40;
+    margin: 16px 0;
+  }
 }
 .input {
   font-size: 20px;
@@ -33,12 +39,14 @@ const input = ref('')
   border-radius: 3px;
   flex: 1;
   margin-right: 8px;
-  padding: 0  16px;
+  padding: 0 16px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #7dced5;
+  }
 }
-.input:focus {
-  outline: none;
-  border: 1px solid #7dced5;
-}
+
 .button {
   background-color: #7dced5;
   width: 48px;
@@ -46,9 +54,10 @@ const input = ref('')
   color: white;
   font-size: 32px;
   border-radius: 3px;
-}
-.button:active {
-  background-color: #31c5d3;
-  border: none;
+
+  &:active {
+    background-color: #31c5d3;
+    border: none;
+  }
 }
 </style>

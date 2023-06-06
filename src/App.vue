@@ -19,8 +19,9 @@ const todoList = ref([
   { id: 2, name: 'todo 2', status: false }
 ])
 const addItem = (newItem: string) => {
+  
   const length = todoList.value.length
-  if (newItem.trim()) {
+  if (newItem) {
     todoList.value.push({ id: length + 1, name: newItem, status: false })
   }
   console.log(todoList.value);

@@ -14,23 +14,18 @@ import ListHeader from './components/ListHeader.vue'
 import Left from './components/Left.vue'
 import TodoList from './components/TodoList.vue'
 import { ref } from 'vue'
-const todoList = ref([
-  { id: 1, name: 'todo 1', status: true },
-  { id: 2, name: 'todo 2', status: false }
-])
+import { useTodoListStore } from './stores/index'
+const store = useTodoListStore()
+const todoList = computed(()=>store.todoList)
+store.getTodoList()
+console.log(store.todoList);
 const addItem = (newItem: string) => {
-  
-  const length = todoList.value.length
-  if (newItem) {
-    todoList.value.push({ id: length + 1, name: newItem, status: false })
+  if (newItem.trim()) {
+    store.addTodoItem(newItem)
   }
-  console.log(todoList.value);
-  
 }
-
 const deleteItem = (id: number) => {
-  console.log(id)
-  todoList.value = todoList.value.filter((item) => item.id != id)
+  store.deleteTodoItem(id)
 }
 </script>
 

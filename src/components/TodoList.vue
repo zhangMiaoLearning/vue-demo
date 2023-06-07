@@ -7,6 +7,7 @@
           :key="item.id"
           :label="item.name"
           v-model="item.status"
+          @change="handleCheckTodoItem(item.id)"
         />
         <Delete class="list-item-delete-icon" @click="$emit('deleteItem', item.id)" />
       </div>
@@ -14,11 +15,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useTodoListStore } from '@/stores';
 import { Delete } from '@element-plus/icons-vue'
 const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()
+const store = useTodoListStore()
+function handleCheckTodoItem(id:number){
+  store.checkTodoItem(id)
+  console.log(id);
+  
+}
 </script>
 <style scoped lang="less">
 .list {

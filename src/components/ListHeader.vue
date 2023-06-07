@@ -1,10 +1,11 @@
 <template>
   <div class="list-header">
     <div class="list-header-title">Use this manage your life and work</div>
-    <div class="justify">
+    <div class="justify cloum">
       <input class="input" placeholder="Enter your to do item" v-model="input" />
       <el-button class="button" :icon="Plus" @click="handleAddTodoList" />
     </div>
+    <div v-show="isShowMessage" class="list-header-message">pelease input value</div>
   </div>
 </template>
 
@@ -12,10 +13,17 @@
 import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const input = ref('')
+const isShowMessage = ref(false)
 const emit = defineEmits(['addTodoItem'])
 const handleAddTodoList = () => {
-  emit('addTodoItem', input.value)
+  if (input.value.trim()) {
+    emit('addTodoItem', input.value)
+    isShowMessage.value = false
+  } else {
+    isShowMessage.value = true
+  }
   input.value = ''
+  console.log(isShowMessage.value)
 }
 </script>
 <style scoped lang="less">
@@ -31,6 +39,9 @@ const handleAddTodoList = () => {
     font-style: italic;
     color: #343a40;
     margin: 16px 0;
+  }
+  &-message {
+    color: #f56969;
   }
 }
 .input {

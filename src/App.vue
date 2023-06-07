@@ -2,9 +2,9 @@
   <div class="justify content">
     <Left />
     <div class="right">
-      <ListHeader @addTodoItem="addItem"/>
+      <ListHeader @addTodoItem="addItem" />
       <TodoList :todoList="todoList" @deleteItem="deleteItem" />
-      <CompletedList :todoList="todoList"/>
+      <CompletedList :todoList="todoList" />
     </div>
   </div>
 </template>
@@ -16,13 +16,11 @@ import TodoList from './components/TodoList.vue'
 import { ref } from 'vue'
 import { useTodoListStore } from './stores/index'
 const store = useTodoListStore()
-const todoList = computed(()=>store.todoList)
+const todoList = computed(() => store.todoList)
 store.getTodoList()
-console.log(store.todoList);
+console.log(store.todoList)
 const addItem = (newItem: string) => {
-  if (newItem.trim()) {
-    store.addTodoItem(newItem)
-  }
+  store.addTodoItem(newItem)
 }
 const deleteItem = (id: number) => {
   store.deleteTodoItem(id)

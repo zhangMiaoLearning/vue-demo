@@ -1,7 +1,8 @@
 <template>
   <div class="title">completed</div>
   <div class="list">
-    <div v-for="item in props.todoList">
+    <!--      用v-for就一定要注意key，为什么https://cn.vuejs.org/guide/essentials/list.html#maintaining-state-with-key-->
+    <div v-for="item in props.todoList" :key="item.id">
       <div v-show="item.status" class="list-item">
         <el-checkbox class="list-item-checkbox" :key="item.id" :label="item.name" v-model="item.status" />
       </div>
@@ -9,6 +10,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import {defineProps} from 'vue';
 const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()

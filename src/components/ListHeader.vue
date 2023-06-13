@@ -1,17 +1,18 @@
 <template>
   <div class="list-header">
     <div class="list-header-title">Use this manage your life and work</div>
+<!--    这个类名有点子奇怪啊-->
     <div class="justify cloum">
       <input class="input" placeholder="Enter your to do item" v-model="input" />
       <el-button class="button" :icon="Plus" @click="handleAddTodoList" />
     </div>
-    <div v-show="isShowMessage" class="list-header-message">pelease input value</div>
+    <div v-show="isShowMessage" class="list-header-message">please input value</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Plus } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import { ref ,defineEmits} from 'vue'
 const input = ref('')
 const isShowMessage = ref(false)
 const emit = defineEmits(['addTodoItem'])

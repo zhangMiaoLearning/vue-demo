@@ -1,6 +1,7 @@
 <template>
   <div class="list">
-    <div v-for="item in props.todoList">
+<!--    用v-for要注意key的使用-->
+    <div v-for="item in props.todoList" :key="item.idi">
       <div v-show="!item.status" class="list-item">
         <el-checkbox
           class="list-item-checkbox"
@@ -17,6 +18,7 @@
 <script setup lang="ts">
 import { useTodoListStore } from '@/stores';
 import { Delete } from '@element-plus/icons-vue'
+import {defineProps} from 'vue';
 const props = defineProps<{
   todoList: { id: number; name: string; status: boolean }[]
 }>()
@@ -24,7 +26,6 @@ const store = useTodoListStore()
 function handleCheckTodoItem(id:number){
   store.checkTodoItem(id)
   console.log(id);
-  
 }
 </script>
 <style scoped lang="less">
